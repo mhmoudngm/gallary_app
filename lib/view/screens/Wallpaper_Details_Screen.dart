@@ -57,15 +57,12 @@ class _Wallpaper_Details_ScreenState extends State<Wallpaper_Details_Screen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
     final imageindex = routearg['index'] as int;
     final imageslist = routearg['list'] as List;
-    List<bool> favouritlist = [];
     var provider = Provider.of<myprovider>(context, listen: false);
     Future<bool> onLikeButtonTapped(bool isLiked) async {
-      var prefs = await SharedPreferences.getInstance();
       if (imageslist == null) {
-        prefs.setStringList(
-            "imgurl", [provider.allimages[imageindex].src.large]);
+        provider.favouritimages(provider.allimages[imageindex].src.large);
       } else {
-        prefs.setStringList("imgurl", [imageslist[imageindex].src.large]);
+        provider.favouritimages(imageslist[imageindex].src.large);
       }
       return !isLiked;
     }

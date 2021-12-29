@@ -35,9 +35,8 @@ class myprovider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> favouritimages() async {
-    var prefs = await SharedPreferences.getInstance();
-    favouritlist = prefs.getStringList("imgurl")!;
+  Future<void> favouritimages(var url) async {
+    favouritlist.add(url);
     notifyListeners();
   }
 }
